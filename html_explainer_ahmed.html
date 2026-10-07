@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح HTML | تقنيات الشبكات وبرمجيات الحاسوب</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: #07111f;
+            color: #eaf2ff;
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0, 210, 255, .16), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(120, 70, 255, .18), transparent 30%),
+                linear-gradient(135deg, #06101d, #0b1830 55%, #11102b);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .hero::before {
+            width: 240px;
+            height: 240px;
+            border: 1px solid rgba(0, 220, 255, .25);
+            top: 10%;
+            left: 8%;
+        }
+
+        .hero::after {
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(150, 100, 255, .2);
+            bottom: -100px;
+            right: 5%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            50% { transform: translateY(-20px) scale(1.04); }
+        }
+
+        .hero-content {
+            max-width: 950px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 1px solid rgba(100, 220, 255, .35);
+            border-radius: 50px;
+            background: rgba(255,255,255,.06);
+            color: #7de8ff;
+            margin-bottom: 22px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 7vw, 72px);
+            line-height: 1.2;
+            margin-bottom: 22px;
+            background: linear-gradient(90deg, #fff, #73e7ff, #a98bff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: #bdcce2;
+            font-size: clamp(17px, 2.4vw, 22px);
+            max-width: 760px;
+            margin: auto;
+        }
+
+        .developer {
+            margin-top: 28px;
+            color: #fff;
+            font-size: 17px;
+        }
+
+        .developer strong {
+            color: #72e7ff;
+        }
+
+        .start-btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 13px 30px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #08b9e8, #715cff);
+            box-shadow: 0 10px 35px rgba(45, 166, 255, .25);
+            transition: .25s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(45, 166, 255, .4);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(15px);
+            background: rgba(5, 14, 27, .82);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .nav-inner {
+            max-width: 1150px;
+            margin: auto;
+            padding: 13px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #79e9ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            padding: 6px 12px;
+            border-radius: 8px;
+            color: #c8d5e8;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,.08);
+            color: white;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #92a4bd;
+        }
+
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 70px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 15px 45px rgba(0,0,0,.15);
+        }
+
+        .card .number {
+            font-size: 28px;
+            color: #73e7ff;
+            font-weight: bold;
+        }
+
+        .card h3 {
+            margin: 8px 0;
+        }
+
+        .card p {
+            color: #9eafc7;
+            font-size: 15px;
+        }
+
+        .code-section {
+            margin-bottom: 35px;
+        }
+
+        .line-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+            gap: 20px;
+            align-items: stretch;
+            margin-bottom: 20px;
+        }
+
+        .code-box,
+        .explain-box {
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,.09);
+            overflow: hidden;
+        }
+
+        .code-box {
+            background: #020812;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .code-head,
+        .explain-head {
+            padding: 11px 15px;
+            background: rgba(255,255,255,.045);
+            color: #8fa5c2;
+            font-size: 13px;
+        }
+
+        pre {
+            padding: 20px;
+            overflow-x: auto;
+            color: #d9f4ff;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 15px;
+        }
+
+        .tag {
+            color: #66d9ff;
+        }
+
+        .attr {
+            color: #c69cff;
+        }
+
+        .value {
+            color: #9ee493;
+        }
+
+        .text-code {
+            color: #f7d774;
+        }
+
+        .explain-box {
+            background: rgba(255,255,255,.035);
+            padding-bottom: 20px;
+        }
+
+        .explain-content {
+            padding: 20px;
+        }
+
+        .explain-content h3 {
+            color: #78e8ff;
+            margin-bottom: 10px;
+        }
+
+        .explain-content p {
+            color: #c2cede;
+        }
+
+        .tip {
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-right: 3px solid #765dff;
+            background: rgba(118,93,255,.08);
+            color: #cfd4ff;
+            font-size: 14px;
+        }
+
+        .full-code {
+            margin-top: 65px;
+        }
+
+        .full-code pre {
+            direction: ltr;
+            text-align: left;
+            background: #020812;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 18px;
+            line-height: 1.75;
+        }
+
+        .quiz {
+            margin-top: 70px;
+            padding: 35px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(0,200,255,.08), rgba(120,80,255,.09));
+            border: 1px solid rgba(120,220,255,.12);
+        }
+
+        .quiz h2 {
+            margin-bottom: 10px;
+        }
+
+        .quiz p {
+            color: #9fb0c8;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            padding: 18px;
+            margin-top: 12px;
+            border-radius: 12px;
+            background: rgba(0,0,0,.18);
+        }
+
+        .question button {
+            margin-top: 10px;
+            padding: 8px 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #17314b;
+            color: white;
+            cursor: pointer;
+        }
+
+        .answer {
+            display: none;
+            margin-top: 10px;
+            color: #82edbb;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 35px 20px;
+            text-align: center;
+            color: #8293aa;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+
+        footer strong {
+            color: #75e7ff;
+        }
+
+        @media (max-width: 800px) {
+            .line-card {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-inner {
+                flex-direction: column;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="badge">HTML • من الصفر إلى الفهم</span>
+
+        <h1>مرحباً بك في درس HTML</h1>
+
+        <p>
+            هذا الموقع موجه لطلبة تقنيات الشبكات وبرمجيات الحاسوب،
+            ويشرح كود HTML خطوة بخطوة وبأسلوب بسيط وواضح.
+        </p>
+
+        <div class="developer">
+            تم تطوير هذا الموقع بواسطة <strong>أحمد</strong>
+        </div>
+
+        <a class="start-btn" href="#lesson">ابدأ الشرح ↓</a>
+    </div>
+</section>
+
+<nav>
+    <div class="nav-inner">
+        <div class="logo">HTML • Ahmed</div>
+        <div class="nav-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#lesson">شرح الكود</a>
+            <a href="#full-code">الكود كامل</a>
+            <a href="#quiz">اختبر نفسك</a>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+
+    <section id="lesson">
+        <div class="section-title">
+            <h2>شرح الكود سطرًا سطرًا</h2>
+            <p>لن نكتفي بحفظ الكود، بل سنفهم وظيفة كل جزء منه.</p>
+        </div>
+
+        <div class="overview">
+            <div class="card">
+                <div class="number">01</div>
+                <h3>هيكل الصفحة</h3>
+                <p>نتعرف على HTML و HEAD و BODY.</p>
+            </div>
+
+            <div class="card">
+                <div class="number">02</div>
+                <h3>إعداد الصفحة</h3>
+                <p>نفهم الترميز وخصائص الشاشة والعنوان.</p>
+            </div>
+
+            <div class="card">
+                <div class="number">03</div>
+                <h3>محتوى الصفحة</h3>
+                <p>نتعلم HEADER و NAV و SECTION و ARTICLE.</p>
+            </div>
+
+            <div class="card">
+                <div class="number">04</div>
+                <h3>نهاية الصفحة</h3>
+                <p>نتعرف على FOOTER ونغلق عناصر HTML بشكل صحيح.</p>
+            </div>
+        </div>
+
+        <div class="code-section">
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">السطر 1</div>
+                    <pre>&lt;<span class="tag">!DOCTYPE html</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>ما وظيفة DOCTYPE؟</h3>
+                        <p>هذا السطر يخبر المتصفح أن المستند مكتوب باستخدام HTML5.</p>
+                        <div class="tip">مهم: لا يظهر هذا السطر للمستخدم داخل الصفحة، بل هو تعريف لنوع المستند.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">السطر 2</div>
+                    <pre>&lt;<span class="tag">html</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>بداية مستند HTML</h3>
+                        <p>هذا هو العنصر الرئيسي الذي يحتوي على جميع عناصر صفحة HTML.</p>
+                        <div class="tip">كل ما يتعلق بالصفحة يكون داخل &lt;html&gt; و &lt;/html&gt;.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">السطران 3 - 7</div>
+                    <pre>&lt;<span class="tag">head</span>&gt;
+    &lt;<span class="tag">meta</span> <span class="attr">charset</span>=<span class="value">"UTF-8"</span>&gt;
+    &lt;<span class="tag">meta</span> <span class="attr">name</span>=<span class="value">"viewport"</span>
+         <span class="attr">content</span>=<span class="value">"width=device-width, initial-scale=1.0"</span>&gt;
+    &lt;<span class="tag">title</span>&gt;<span class="text-code">student of (A) class</span>&lt;/<span class="tag">title</span>&gt;
+&lt;/<span class="tag">head</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>&lt;head&gt; — معلومات الصفحة</h3>
+                        <p><strong>meta charset="UTF-8"</strong> يحدد ترميز الأحرف، ولذلك تستطيع الصفحة عرض العربية والإنجليزية بشكل صحيح.</p>
+                        <p><strong>viewport</strong> يجعل الصفحة أكثر ملاءمة لشاشات الهواتف والأجهزة المختلفة.</p>
+                        <p><strong>title</strong> يحدد العنوان الذي يظهر في تبويب المتصفح.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">السطر 8</div>
+                    <pre>&lt;<span class="tag">body</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>بداية محتوى الصفحة</h3>
+                        <p>كل ما نريد أن يظهر للمستخدم داخل صفحة الموقع يوضع عادةً داخل عنصر <strong>body</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">HEADER</div>
+                    <pre>&lt;<span class="tag">header</span>&gt;
+    <span class="text-code">مادة تصميم مواقع الالكترونية</span>
+&lt;/<span class="tag">header</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>&lt;header&gt; — رأس الصفحة</h3>
+                        <p>يستخدم لتمثيل الجزء العلوي أو المقدمة الخاصة بالصفحة أو القسم.</p>
+                        <div class="tip">كلمة header تعني "رأس" أو "مقدمة".</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">NAV</div>
+                    <pre>&lt;<span class="tag">nav</span>&gt;
+    <span class="text-code">www.google.com</span>
+&lt;/<span class="tag">nav</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>&lt;nav&gt; — قائمة التنقل</h3>
+                        <p>يستخدم لاحتواء روابط أو عناصر التنقل في الموقع.</p>
+                        <div class="tip">ملاحظة: كتابة www.google.com وحدها لا تجعلها رابطًا قابلًا للنقر. نحتاج إلى &lt;a&gt; لإنشاء رابط.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">SECTION + ARTICLE</div>
+                    <pre>&lt;<span class="tag">section</span>&gt;
+    &lt;<span class="tag">article</span>&gt;
+        <span class="text-code">محاضرة الاولى تتضمن مقدمة عن الشبكات</span>
+    &lt;/<span class="tag">article</span>&gt;
+&lt;/<span class="tag">section</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>تنظيم محتوى الصفحة</h3>
+                        <p><strong>section</strong> يمثل قسمًا من الصفحة.</p>
+                        <p><strong>article</strong> يمثل محتوى مستقلًا مثل محاضرة أو خبر أو مقال.</p>
+                        <div class="tip">هنا تم استخدام article لتمثيل محتوى محاضرة.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">SECTION الثانية</div>
+                    <pre>&lt;<span class="tag">section</span>&gt;
+    &lt;<span class="tag">article</span>&gt;
+        <span class="text-code">محاضرة HTML الثانية تتضمن مقدمة عن</span>
+    &lt;/<span class="tag">article</span>&gt;
+&lt;/<span class="tag">section</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>قسم آخر</h3>
+                        <p>يمكن أن تحتوي الصفحة على أكثر من section، وكل قسم يمكن أن يحتوي على محتوى مختلف.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">FOOTER</div>
+                    <pre>&lt;<span class="tag">footer</span>&gt;
+    <span class="text-code">call us: 0770333333</span>
+&lt;/<span class="tag">footer</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>&lt;footer&gt; — تذييل الصفحة</h3>
+                        <p>يستخدم في نهاية الصفحة لعرض معلومات مثل بيانات الاتصال أو حقوق النشر أو روابط إضافية.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line-card">
+                <div class="code-box">
+                    <div class="code-head">النهاية</div>
+                    <pre>&lt;/<span class="tag">body</span>&gt;
+&lt;/<span class="tag">html</span>&gt;</pre>
+                </div>
+                <div class="explain-box">
+                    <div class="explain-head">الشرح</div>
+                    <div class="explain-content">
+                        <h3>إغلاق الصفحة</h3>
+                        <p>نغلق أولًا body ثم html حتى يكون هيكل المستند مكتملًا ومنظمًا.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="full-code" id="full-code">
+        <div class="section-title">
+            <h2>الكود كاملًا</h2>
+            <p>يمكنك نسخ هذا الكود وتجربته في ملف HTML.</p>
+        </div>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;student of (A) class&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;header&gt;
+    مادة تصميم مواقع الالكترونية
+&lt;/header&gt;
+
+&lt;nav&gt;
+    www.google.com
+&lt;/nav&gt;
+
+&lt;section&gt;
+    &lt;article&gt;
+        محاضرة الاولى تتضمن مقدمة عن الشبكات
+    &lt;/article&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;article&gt;
+        محاضرة HTML الثانية تتضمن مقدمة عن
+    &lt;/article&gt;
+&lt;/section&gt;
+
+&lt;footer&gt;
+    call us: 0770333333
+&lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </section>
+
+    <section class="quiz" id="quiz">
+        <h2>🧠 اختبر نفسك</h2>
+        <p>حاول الإجابة قبل الضغط على زر إظهار الإجابة.</p>
+
+        <div class="question">
+            <strong>1. ما وظيفة &lt;title&gt;؟</strong><br>
+            <button onclick="showAnswer(1)">إظهار الإجابة</button>
+            <div class="answer" id="answer1">يحدد العنوان الذي يظهر في تبويب المتصفح.</div>
+        </div>
+
+        <div class="question">
+            <strong>2. أين نضع المحتوى الذي يظهر للمستخدم؟</strong><br>
+            <button onclick="showAnswer(2)">إظهار الإجابة</button>
+            <div class="answer" id="answer2">داخل عنصر &lt;body&gt;.</div>
+        </div>
+
+        <div class="question">
+            <strong>3. ما وظيفة &lt;footer&gt;؟</strong><br>
+            <button onclick="showAnswer(3)">إظهار الإجابة</button>
+            <div class="answer" id="answer3">يمثل الجزء السفلي أو تذييل الصفحة.</div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    تم تصميم وتطوير هذا الموقع بواسطة <strong>أحمد</strong> •
+    لطلبة تقنيات الشبكات وبرمجيات الحاسوب
+</footer>
+
+<script>
+    function showAnswer(number) {
+        document.getElementById("answer" + number).style.display = "block";
+    }
+</script>
+
+</body>
+</html>
